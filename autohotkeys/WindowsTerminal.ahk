@@ -1,4 +1,7 @@
-﻿SwitchToWindowsTerminal()
+﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
+#SingleInstance Force
+
+SwitchToWindowsTerminal()
 {
   windowHandleId := WinExist("ahk_exe WindowsTerminal.exe")
   windowExistsAlready := windowHandleId > 0

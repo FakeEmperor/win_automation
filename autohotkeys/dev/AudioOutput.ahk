@@ -1,10 +1,3 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-#SingleInstance Force
-
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
-
 ; http://www.daveamenta.com/2011-05/programmatically-or-command-line-change-the-default-sound-playback-device-in-windows-7/
 Devices := {}
 IMMDeviceEnumerator := ComObjCreate("{BCDE0395-E52F-467C-8E3D-C4579291692E}", "{A95664D2-9614-4F35-A746-DE8DB63617E6}")
@@ -44,23 +37,17 @@ Loop % (Count)
     ObjRawSet(Devices, DeviceName, DeviceID)
 }
 ObjRelease(IMMDeviceCollection)
-Return
 
 
-^F1:: SetDefaultEndpoint( GetDeviceID(Devices, "Realtek(R) Audio") )
-^F2:: SetDefaultEndpoint( GetDeviceID(Devices, "Beoplay H9i Stereo") )
-^F3:: SetDefaultEndpoint( GetDeviceID(Devices, "Beoplay H9i Hands-Free AG Audio") )
+Devices2 := {}
+For DeviceName, DeviceID in Devices
+    List .= "(" . A_Index . ") " . DeviceName . "`n", ObjRawSet(Devices2, A_Index, DeviceID)
+InputBox n,, % List,,,,,,,, 1
 
-SetDefaultEndpoint(DeviceID)
-{
-    IPolicyConfig := ComObjCreate("{870af99c-171d-4f9e-af0d-e63df40c2bc9}", "{F8679F50-850A-41CF-9C72-430F290290C8}")
-    DllCall(NumGet(NumGet(IPolicyConfig+0)+13*A_PtrSize), "UPtr", IPolicyConfig, "UPtr", &DeviceID, "UInt", 0, "UInt")
-    ObjRelease(IPolicyConfig)
-}
+MsgBox % Devices2[n]
 
-GetDeviceID(Devices, Name)
-{
-    For DeviceName, DeviceID in Devices
-        If (InStr(DeviceName, Name))
-            Return DeviceID
-}
+;IPolicyConfig::SetDefaultEndpoint
+IPolicyConfig := ComObjCreate("{870af99c-171d-4f9e-af0d-e63df40c2bc9}", "{F8679F50-850A-41CF-9C72-430F290290C8}") ;00000102-0000-0000-C000-000000000046 00000000-0000-0000-C000-000000000046
+R := DllCall(NumGet(NumGet(IPolicyConfig+0)+13*A_PtrSize), "UPtr", IPolicyConfig, "Str", Devices2[n], "UInt", 0, "UInt")
+ObjRelease(IPolicyConfig)
+MsgBox % Format("0x{:08X}", R)
