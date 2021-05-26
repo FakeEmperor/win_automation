@@ -3,7 +3,15 @@
 FileRead,MuteSound,*c resources\mutesound.wav
 FileRead,UnmuteSound,*c resources\unmutesound.wav
 
+
 SoundGet, master_mute, , mute, 9
+
+SoundGet, master_mute_8, , mute, 8
+; Control auxillary mics as well
+if (master_mute != master_mute_8) {
+  SoundSet, +1, MASTER, mute, 8
+}
+
 if (master_mute = "On") {
   Menu, Tray, Icon, resources\mute_alt_2.png
 }
@@ -17,7 +25,8 @@ else {
 ;<---------IMPORTANT-------->
 ; 9 was my mic id number use the code below the dotted line to find your mic id. you need to replace all 9's  
 
-SoundSet, +1, MASTER, mute, 9 
+SoundSet, +1, MASTER, mute, 9
+SoundSet, +1, MASTER, mute, 8
 SoundGet, master_mute, , mute, 9
 
 ToolTip,% "Mic " (master_mute="On"?"Off":"On") ;use a tool tip at mouse pointer to show what state mic is after toggle
