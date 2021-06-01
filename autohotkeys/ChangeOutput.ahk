@@ -47,9 +47,20 @@ ObjRelease(IMMDeviceCollection)
 Return
 
 
-^F1:: SetDefaultEndpoint( GetDeviceID(Devices, "Headphones") )
-^F2:: SetDefaultEndpoint( GetDeviceID(Devices, "Headset") )
-^F3:: SetDefaultEndpoint( GetDeviceID(Devices, "Speakers") )
+^F1:: 
+SetDefaultEndpoint( GetDeviceID(Devices, "Headphones") )
+SetDefaultEndpoint( GetDeviceID(Devices, "Наушники") )
+Return
+
+^F2:: 
+SetDefaultEndpoint( GetDeviceID(Devices, "Headset") )
+SetDefaultEndpoint( GetDeviceID(Devices, "Головной телефон") )
+Return
+
+^F3:: 
+SetDefaultEndpoint( GetDeviceID(Devices, "Speakers") )
+SetDefaultEndpoint( GetDeviceID(Devices, "Динамики") )
+Return
 
 SetDefaultEndpoint(DeviceID)
 {
