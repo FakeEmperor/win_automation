@@ -41,7 +41,7 @@ ObjRelease(IMMDeviceCollection)
 
 Devices2 := {}
 For DeviceName, DeviceID in Devices
-    List .= "(" . A_Index . ") " . DeviceName . "`n", ObjRawSet(Devices2, A_Index, DeviceID)
+    List .= "(" . A_Index . ") " . DeviceName . "AHAHAH" . "`n", ObjRawSet(Devices2, A_Index, DeviceID)
 InputBox n,, % List,,,,,,,, 1
 
 MsgBox % Devices2[n]

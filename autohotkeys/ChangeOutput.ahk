@@ -47,9 +47,9 @@ ObjRelease(IMMDeviceCollection)
 Return
 
 
-^F1:: SetDefaultEndpoint( GetDeviceID(Devices, "Realtek(R) Audio") )
-^F2:: SetDefaultEndpoint( GetDeviceID(Devices, "Beoplay H9i Stereo") )
-^F3:: SetDefaultEndpoint( GetDeviceID(Devices, "Beoplay H9i Hands-Free AG Audio") )
+^F1:: SetDefaultEndpoint( GetDeviceID(Devices, "Headphones") )
+^F2:: SetDefaultEndpoint( GetDeviceID(Devices, "Headset") )
+^F3:: SetDefaultEndpoint( GetDeviceID(Devices, "Speakers") )
 
 SetDefaultEndpoint(DeviceID)
 {
